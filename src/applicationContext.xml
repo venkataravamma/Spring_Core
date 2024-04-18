@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+	<bean id="a1" class="com.spring.bean.Address">
+		<constructor-arg value="Hyderabad"></constructor-arg>
+		<constructor-arg value="TS"></constructor-arg>
+		<constructor-arg value="India"></constructor-arg>
+	</bean>
+
+	<bean id="b1" class="com.spring.bean.Book">
+		<constructor-arg value="Low of Action"></constructor-arg>
+		<constructor-arg value="Vyasa"></constructor-arg>
+	</bean>
+
+	<bean id="b2" class="com.spring.bean.Book">
+		<constructor-arg value="Low of Integrity"></constructor-arg>
+		<constructor-arg value="Aristatle"></constructor-arg>
+	</bean>
+
+	<bean id="q1" class="com.spring.bean.Question">
+		<constructor-arg
+			value="Should social media be allowed in schools? Why or why not?"></constructor-arg>
+	</bean>
+
+	<bean id="q2" class="com.spring.bean.Question">
+		<constructor-arg
+			value="Can anyone give an example of photosynthesis in nature?"></constructor-arg>
+	</bean>
+
+	<bean id="ans1" class="com.spring.bean.Answer">
+		<constructor-arg
+			value="No, it can be distracting. It could be better used for learning outside of class."></constructor-arg>
+	</bean>
+
+	<bean id="ans2" class="com.spring.bean.Answer">
+		<constructor-arg
+			value="Trees use sunlight to convert carbon dioxide into oxygen"></constructor-arg>
+	</bean>
+
+	<bean id="student" class="com.spring.bean.Student">
+
+		<!-- Dependency Injection by Constructor injecting primitive & string-based 
+			values -->
+		<constructor-arg value="1" type="int"></constructor-arg>
+		<constructor-arg value="vinni"></constructor-arg>
+
+		<!-- Dependency Injection by Constructor Injecting with Dependent Object -->
+		<constructor-arg>
+			<ref bean="a1" />
+		</constructor-arg>
+
+		<!-- Dependency Injection by Constructor Injecting with Collection List 
+			Example -->
+		<constructor-arg>
+			<list>
+				<value>Mathematics</value>
+				<value>Physics</value>
+				<value>English</value>
+			</list>
+		</constructor-arg>
+
+		<!-- Dependency Injection by Constructor Injecting with Non-String Collection 
+			(having Dependent Object) Example -->
+		<constructor-arg>
+			<list>
+				<ref bean="b1" />
+				<ref bean="b2" />
+			</list>
+		</constructor-arg>
+
+		<!-- Dependency Injection by Constructor Injecting with Map Example -->
+		<constructor-arg>
+			<map>
+				<entry key="What's your favorite book genre?"
+					value="Fantasy, because it lets me escape into magical worlds."></entry>
+				<entry key="Early bird or night owl?"
+					value="Night owl, I seem to focus better at night"></entry>
+			</map>
+		</constructor-arg>
+
+		<!-- Dependency Injection by Constructor Injecting with Non-String Map 
+			(having dependent Object) Example -->
+		<constructor-arg>
+			<map>
+				<entry key-ref="q1" value-ref="ans1"></entry>
+				<entry key-ref="q2" value-ref="ans2"></entry>
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<!-- Dependency Injection by Inheriting Bean in Spring -->
+	<bean id="student1" class="com.spring.bean.Student">
+		<constructor-arg value="1" type="int"></constructor-arg>
+		<constructor-arg value="vinni"></constructor-arg>
+	</bean>
+	<bean id="student3" class="com.spring.bean.Student"
+		parent="student1">
+		<constructor-arg ref="a1"></constructor-arg>
+	</bean>
+</beans>  

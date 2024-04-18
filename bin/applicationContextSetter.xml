@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+	<bean id="a1" class="com.spring.bean.Address">
+		<property name="city" value="Hyderabad">
+		</property>
+		<property name="state" value="TS">
+		</property>
+		<property name="country" value="India">
+		</property>
+
+	</bean>
+
+	<bean id="b1" class="com.spring.bean.Book">
+		<property name="bname" value="Low of Action">
+		</property>
+		<property name="author" value="Vyasa">
+		</property>
+	</bean>
+
+	<bean id="b2" class="com.spring.bean.Book">
+		<property name="bname" value="Low of Integrity">
+		</property>
+		<property name="author" value="Aristatle">
+		</property>
+	</bean>
+
+	<bean id="q1" class="com.spring.bean.Question">
+		<property name="question"
+			value="Should social media be allowed in schools? Why or why not?">
+
+		</property>
+	</bean>
+
+	<bean id="q2" class="com.spring.bean.Question">
+		<property name="question"
+			value="Can anyone give an example of photosynthesis in nature?">
+		</property>
+	</bean>
+
+	<bean id="ans1" class="com.spring.bean.Answer">
+
+		<property name="answer"
+			value="No, it can be distracting. It could be better used for
+				learning outside of class.">
+
+		</property>
+	</bean>
+
+	<bean id="ans2" class="com.spring.bean.Answer">
+		<property name="answer"
+			value="Trees use sunlight to convert carbon dioxide into oxygen">
+		</property>
+	</bean>
+
+	<bean id="student" class="com.spring.bean.Student">
+
+		<!-- Dependency Injection by Setter injecting primitive & string-based 
+			values -->
+
+		<property name="id" value="1"></property>
+		<property name="name" value="vinni"></property>
+
+		<!-- Dependency Injection by Setter Injecting with Dependent Object -->
+		<property name="address" ref="a1"></property>
+
+		<!-- Dependency Injection by Setter Injecting with Collection List Example -->
+		<property name="subjects">
+			<list>
+				<value>Mathematics</value>
+				<value>Physics</value>
+				<value>English</value>
+			</list>
+		</property>
+
+		<!-- Dependency Injection by Setter Injecting with Non-String Collection 
+			(having Dependent Object) Example -->
+		<property name="books">
+			<list>
+				<ref bean="b1" />
+				<ref bean="b2" />
+			</list>
+		</property>
+
+		<!-- Dependency Injection by Setter Injecting with Map Example -->
+		<property name="queAns">
+			<map>
+				<entry key="What's your favorite book genre?"
+					value="Fantasy, because it lets me escape into magical worlds."></entry>
+				<entry key="Early bird or night owl?"
+					value="Night owl, I seem to focus better at night"></entry>
+			</map>
+		</property>
+
+		<!-- Dependency Injection by Setter Injecting with Non-String Map (having 
+			dependent Object) Example -->
+		<property name="queAns2">
+			<map>
+				<entry key-ref="q1" value-ref="ans1"></entry>
+				<entry key-ref="q2" value-ref="ans2"></entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- Dependency Injection by Inheriting Bean in Spring using Setter -->
+	<bean id="student1" class="com.spring.bean.Student">
+		<property name="id" value="1"></property>
+		<property name="name" value="vinni"></property>
+	</bean>
+	<bean id="student3" class="com.spring.bean.Student"
+		parent="student1">
+		<property name="address" ref="a1"></property>
+	</bean>
+</beans>  
